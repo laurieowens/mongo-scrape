@@ -1,4 +1,9 @@
-   body { background-color: #F2F6D0 }
+   body
+    {  
+      background-image: url("/assets/img/NEWSPAPER-943004_1280.jpg");
+    }
+
+
    h1,h2{
     text-align: center;
    }
@@ -7,7 +12,21 @@
         margin-left: auto;
         margin-right: auto;
         padding-top: 5%;
+
+
+
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+
+
       }
+      #wrapper p {
+    margin: 5%;
+    font-weight: bold;
+    color: #000000;
+}
 
       #articles {
         display: inline-block;
