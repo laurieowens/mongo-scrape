@@ -11,6 +11,7 @@ var Article = require("./models/article.js");
 // Our scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
+var exphbs=require("express-handlebars");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
@@ -26,6 +27,12 @@ app.use(bodyParser.urlencoded({
 
 // Make public a static dir
 app.use(express.static("public"));
+
+//Setting handlebars as view engine
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/scraped-news");
@@ -60,7 +67,7 @@ app.get("/scrape", function(req, res) {
 
         // An empty array to save the data that we'll scrape
        // var result = [];
-       var result = {};
+     //  var result = {};
 
         // Select each instance of the HTML body that you want to scrape
         // NOTE: Cheerio selectors function similarly to jQuery's selectors, 
@@ -82,20 +89,20 @@ app.get("/scrape", function(req, res) {
       // Now, save that entry to the db
       entry.save(function(err, doc) {
         // Log any errors
-        if (err) {
-          console.log(err);
-        }
+       if (err) {
+         console.log(err);
+       }
         // Or log the doc
-        else {
-          console.log(doc);
+       else {
+        console.log(doc);
         }
-      });
+     });
 
     });
   });
   // Tell the browser that we finished scraping the text
   res.send("Scrape Complete");
-  res.redirect("/articles");
+ // res.redirect("/articles");
 
 });
 
