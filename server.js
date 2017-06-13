@@ -16,8 +16,15 @@ var exphbs=require("express-handlebars");
 mongoose.Promise = Promise;
 
 
+
 // Initialize Express
 var app = express();
+
+// set up handlebars engine
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -26,7 +33,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
-app.use(express.static("public"));
+//app.use(express.static("public"));
+
+// Serve static content for the app from the 'public' directory in the
+// application directory.
+app.use(express.static(__dirname + '/public'));
 
 //Setting handlebars as view engine
 app.engine('handlebars', exphbs({
